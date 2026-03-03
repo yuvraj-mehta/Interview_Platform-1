@@ -9,10 +9,11 @@ export const inngest = new Inngest({
 
 const syncUser = inngest.createFunction(
     { id: "Sync User" },
-    {event: "clerk.user.created" },
+    {event: "clerk/user.created" },
     async ({ event}) => { 
         await connectDB();
-          
+          console.log("SyncUser function triggered");
+         console.log("Event data:", event.data);
         const {id, email_addresses, first_name, last_name, image_url} = event.data;
         const newUser = new User({
             clerkId: id,
@@ -23,8 +24,6 @@ const syncUser = inngest.createFunction(
         await newUser.save();
     }
 );
-// console.log("EVENT KEY:", process.env.INNGEST_EVENT_KEY);
-// console.log("SIGNING KEY:", process.env.INNGEST_SIGNING_KEY);
 
 
 const deleteUserFromDB = inngest.createFunction(
