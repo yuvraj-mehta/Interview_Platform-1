@@ -33,3 +33,6 @@ export const deleteStreamUser = async (userId) => {
 
 
 // add another method to generate token
+export const generateStreamToken = (userId) => {
+    return chatClient.createToken(userId);
+};
