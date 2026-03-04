@@ -1,6 +1,7 @@
 import { Inngest} from "inngest";
 import { connectDB } from "./db.js";
 import User from "../models/User.js";
+import { upsertStreamUser } from "./stream.js";
  
 export const inngest = new Inngest({
   id: "talent-iq",
@@ -22,6 +23,13 @@ const syncUser = inngest.createFunction(
             email: email_addresses[0].email_address,  
         });  
         await newUser.save();
+      
+        await upsertStreamUser({
+            id: newUser.clerkId.toString(),
+            name: newUser.name,
+            profileImage: newUser.profileImage,
+        });
+
     }
 );
 
@@ -35,6 +43,8 @@ const deleteUserFromDB = inngest.createFunction(
         const {id} = event.data;
          await User.deleteOne({clerkId: id});
         
+
+         await deleteStreamUser(id.toString());
     }
 );
 
