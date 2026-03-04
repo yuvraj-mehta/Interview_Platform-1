@@ -20,7 +20,7 @@ export const upsertStreamUser = async (userData) => {
     } catch (error) {
         console.error("Error upserting Stream user:", error);
     }
-}
+};
 
 export const deleteStreamUser = async (userId) => {
     try{
@@ -29,7 +29,7 @@ export const deleteStreamUser = async (userId) => {
     } catch (error) {
         console.error("Error deleting Stream user:", error);
     }
-}
+};
 
 
 // add another method to generate token
