@@ -31,8 +31,8 @@ app.get('/books', (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
-console.log("Stream Key:", process.env.STREAM_API_KEY);
-console.log("Stream Secret:", process.env.STREAM_API_SECRET);
+console.log("EVENT KEY:", process.env.INNGEST_EVENT_KEY);
+console.log("SIGNING KEY:", process.env.INNGEST_SIGNING_KEY);
 
 const startServer = async () => {
   try{

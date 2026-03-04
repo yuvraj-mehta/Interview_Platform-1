@@ -3,7 +3,11 @@ import { connectDB } from "./db.js";
 import User from "../models/User.js";
 import { deleteStreamUser, upsertStreamUser } from "./stream.js";
 
-export const inngest = new Inngest({ id: "talent-iq" });
+export const inngest = new Inngest({
+  id: "talent-iq",
+  eventKey: process.env.INNGEST_EVENT_KEY,
+  signingKey: process.env.INNGEST_SIGNING_KEY,
+});
 
 const syncUser = inngest.createFunction(
   { id: "sync-user" },
