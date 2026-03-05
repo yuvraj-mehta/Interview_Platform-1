@@ -1,5 +1,10 @@
 import { useEffect } from "react";
 import { SignedIn, SignedOut, SignIn, SignInButton, SignOutButton, UserButton } from "@clerk/clerk-react";
+import { Navigate, Route, Routes } from "react-router";
+import HomePage from "./pages/HomePage";
+import ProblemsPage from "./pages/ProblemsPage";
+import { useUser } from "@clerk/clerk-react";
+import { Toaster, toast } from "react-hot-toast";
 
 
 function App() {
@@ -13,19 +18,18 @@ function App() {
       .catch(err => console.log("FETCH ERROR:", err));
   }, []);
 
+  const {isSignedIn} = useUser();
+
 return (
-  <div className="page">
-    <h1>Welcome to InterviewBit</h1>
+  <>
+  <Routes>
 
-    <SignedOut>
-      <SignInButton mode="modal" />
-    </SignedOut>
-
-    <SignedIn>
-      <UserButton />
-      <SignOutButton />
-    </SignedIn>
-  </div>
+    <Route path="/" element={<HomePage/>} />
+    <Route path="/problems" element={isSignedIn ? <ProblemsPage/> : <Navigate to={"/"} />} />
+   
+  </Routes>
+   <Toaster toastOptions={{duration: 3000}}/>
+  </>
 );
 
 }
