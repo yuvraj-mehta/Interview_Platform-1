@@ -8,6 +8,7 @@ import {clerkMiddleware} from "@clerk/express";
 import dns from "node:dns";
 import { protectRoute } from './middleware/protectRoute.js';
 import chatRoutes from "./routes/chatRoutes.js";
+import sessionRoutes from "./routes/sessionRoutes.js";
 dns.setServers(["1.1.1.1", "8.8.8.8"]);
 dns.setDefaultResultOrder("ipv4first");
 
@@ -25,6 +26,7 @@ app.use(clerkMiddleware());
 app.use("/api/inngest", serve({client:inngest, functions})
 );
 app.use("/api/chat", chatRoutes)
+app.use("/api/sessions", sessionRoutes)
 
 app.get('/health', (req, res) => {
   res.status(200).json({message: "success from api"})
@@ -39,8 +41,8 @@ app.get('/video-calls', protectRoute, (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
-console.log("EVENT KEY:", process.env.INNGEST_EVENT_KEY);
-console.log("SIGNING KEY:", process.env.INNGEST_SIGNING_KEY);
+// console.log("EVENT KEY:", process.env.INNGEST_EVENT_KEY);
+// console.log("SIGNING KEY:", process.env.INNGEST_SIGNING_KEY);
 
 const startServer = async () => {
   try{
