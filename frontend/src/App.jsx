@@ -5,7 +5,7 @@ import HomePage from "./pages/HomePage";
 import ProblemsPage from "./pages/ProblemsPage";
 import { useUser } from "@clerk/clerk-react";
 import { Toaster, toast } from "react-hot-toast";
-import DashboardPage from "./pages/DashboardPage";
+import DashboardPage from "./pages/Dashboardpage";
 
 
 function App() {
