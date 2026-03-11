@@ -9,6 +9,8 @@ import dns from "node:dns";
 import { protectRoute } from './middleware/protectRoute.js';
 import chatRoutes from "./routes/chatRoutes.js";
 import sessionRoutes from "./routes/sessionRoutes.js";
+import codeRoutes from "./routes/codeRoutes.js";
+import path from "path";
 dns.setServers(["1.1.1.1", "8.8.8.8"]);
 dns.setDefaultResultOrder("ipv4first");
 
@@ -35,7 +37,8 @@ app.use("/api/inngest", serve({client:inngest, functions})
 );
 app.use("/api/chat", chatRoutes)
 app.use("/api/sessions", sessionRoutes)
-
+// to eexecute code in the editor, we will use the piston api which is a free api that supports multiple programming languages. We will create a route for it in the backend and then call that route from the frontend when the user clicks on the run button in the code editor.
+app.use("/api/code", codeRoutes);
 app.get('/health', (req, res) => {
   res.status(200).json({message: "success from api"})
 });
