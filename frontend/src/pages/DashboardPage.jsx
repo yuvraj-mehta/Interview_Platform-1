@@ -47,6 +47,8 @@ function DashboardPage() {
     return session.host?.clerkId === user.id || session.participant?.clerkId === user.id;
   };
 
+
+
   return (
     <>
       <div className="min-h-screen bg-base-300">
