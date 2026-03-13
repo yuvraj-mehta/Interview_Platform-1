@@ -17,6 +17,8 @@ dns.setDefaultResultOrder("ipv4first");
 
 const app = express();
 
+app.set("trust proxy", 1);
+
 const __dirname = process.cwd();
 app.use(express.json());
 // Middleware
@@ -25,9 +27,11 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://interview-platform-lemon-eight.vercel.app"
+      "https://interview-platform-lemon-eight.vercel.app",
     ],
     credentials: true,
+    methods: ["GET","POST","PUT","DELETE","OPTIONS"],
+    allowedHeaders: ["Content-Type","Authorization"],
   })
 );
 
